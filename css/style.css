@@ -1,0 +1,96 @@
+body{
+    background: #f0efea;
+    font-family: 'Poppins', sans-serif;
+    color: darkgray;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.container{
+    background: white;
+    width: 20%;
+    min-height: 35vh;
+    padding: 3% 3% 10% 3%;
+    box-shadow: 1px 1px 5px lightgray;
+    z-index: 0;
+}
+
+.ajout{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: -3%;
+    z-index: 1;
+}
+
+.plus{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #7adfa9;
+    color: white;
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    text-align: center;
+    font-size: xx-large;
+}
+
+.titre{
+    width: 100%;
+    text-align: center;
+    margin-bottom: 11%;
+}
+
+.titre h1{
+    font-size: 30px;
+    color: rgb(129, 126, 126);
+}
+
+.liste ul{
+    line-height: 40px;
+}
+
+li{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.save{
+    display: flex;
+    justify-content: space-around;
+    width: 80%;
+    margin-top: 5%;
+    color: white;
+}
+
+.cookies, .storage{
+    padding: 3%;
+    background-color: lightcoral;
+    text-align: center;
+}
+
+/****** EVENEMENTS ********/
+.done{
+    text-decoration: line-through;
+    color: rgba(199, 196, 196, 0.932);
+}
+
+.validated{
+    color: green;
+}
+
+.delete{
+    color: rgba(95, 158, 160, 0.74);
+}
+
+.hide{
+    display: none;
+}
