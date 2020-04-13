@@ -16,6 +16,7 @@ function creationListeItem(valeurInput){
     let trash = document.createElement('i');
     icone.classList.add("far", "fa-circle");
     trash.classList.add("fas", "fa-trash", "delete", "hide");
+
     ajouterDOM(span, valeurInput);
     ajouterDOM(li, span);
     ajouterDOM(li, icone);
@@ -106,6 +107,26 @@ function creationCookies(nom, quoi){
     let date = new Date(Date.now() + 86400000);
     date = date.toUTCString();
 
-    return document.cookie = nom + "=" + quoi + date; //les cookies seront supprimés un jour après la date de la création
+    return document.cookie = nom + "=" + quoi + " " + date; //les cookies seront supprimés un jour après la date de la création
 
 }
+
+
+/* function creationStorage(){
+    let currentListe = document.querySelectorAll('li');
+    for (let index = 0; index < currentListe.length; index++) {
+        const element = currentListe[index];
+        localStorage.setItem("liste", element);
+    }
+    setListe();
+}
+
+function setListe(){
+    let savedListe = localStorage.getItem('liste');
+    let liste = document.querySelector('ul');
+    for (let index = 0; index < savedListe.length; index++) {
+        const element = savedListe[index];
+        ajouterDOM(liste, element);
+        
+    }
+} */

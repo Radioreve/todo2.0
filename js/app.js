@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function(){
     let iPlus = document.querySelector('.plus');
     let input = creationInput();
 
+
     document.querySelector("body").addEventListener("click", function(event){
         event.stopPropagation();
         let target = event.target;
@@ -35,8 +36,13 @@ document.addEventListener("DOMContentLoaded", function(){
 
         let save1 = document.querySelector(".cookies");
         if(target == save1){
-            let cooks = creationCookies("liste", liste);
-            console.log(cooks);
+            let currentliste = document.querySelectorAll("li");
+            for (let index = 0; index < currentliste.length; index++) {
+                const element = currentliste[index];
+                let item = element.firstChild.innerText;
+                let cooks = creationCookies("liste", item);
+                alert(cooks);
+            }
         }
         
     })
