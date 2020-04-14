@@ -52,8 +52,13 @@ document.addEventListener("DOMContentLoaded", function(){
         let target = event.target;
 
         let iPlus = document.querySelector(".plus");
-        if(target == iPlus){
+        let save1 = document.querySelector(".cookies");
+        let save2 = document.querySelector(".storage");
+
+        if(target == iPlus || target == save1 || target == save2){
             curseur(iPlus, "pointer");
+            curseur(save1, "pointer");
+            curseur(save2, "pointer");
         }
 
         let cercle = document.querySelectorAll(".far");
@@ -72,15 +77,6 @@ document.addEventListener("DOMContentLoaded", function(){
             } 
         }
 
-        let save1 = document.querySelector(".cookies");
-        if(target == save1){
-            curseur(save1, "pointer");
-        }
-
-        let save2 = document.querySelector(".storage");
-        if(target == save2){
-            curseur(save2, "pointer");
-        }
     })
 
     
