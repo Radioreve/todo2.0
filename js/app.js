@@ -51,18 +51,23 @@ document.addEventListener("DOMContentLoaded", function(){
                 const element = items[index];
                 let task = { id: + index, tache: + "" + element.innerHTML + "" };
                 setItem(index, task);
-                let course = getItem(index);
-                todoItems.push(course);
+                todoItems.push(getItem(index));
+                
             }
             if(todoItems.length != 0){
                alert("Liste enregistrée avec succès") 
-            }
-            
-        } 
+               console.log(todoItems)
+            }            
+
+        }
+
         
     })
 
     
+    
+
+
     document.querySelector("body").addEventListener("mouseover", function(event){
         event.stopPropagation();
         let target = event.target;
@@ -95,17 +100,4 @@ document.addEventListener("DOMContentLoaded", function(){
 
     })
 
-    
-    
-    
-
 });
-
-
-
-
-
-
-
-
-
