@@ -1,11 +1,10 @@
 "use strict"
 
 document.addEventListener("DOMContentLoaded", function(){
-
+    
     let liste = document.querySelector("ul");
     let iPlus = document.querySelector('.plus');
     let input = creationInput();
-
 
     document.querySelector("body").addEventListener("click", function(event){
         event.stopPropagation();
@@ -44,9 +43,26 @@ document.addEventListener("DOMContentLoaded", function(){
                 alert(cooks);
             }
         }
+
+        let save2 = document.querySelector(".storage");
+        let items = document.querySelectorAll("span");
+        if(target == save2){
+            for (let index = 0; index < items.length; index++) {
+                const element = items[index];
+                let task = { id: + index, tache: + "" + element.innerHTML + "" };
+                setItem(index, task);
+                let course = getItem(index);
+                todoItems.push(course);
+            }
+            if(todoItems.length != 0){
+               alert("Liste enregistrée avec succès") 
+            }
+            
+        } 
         
     })
 
+    
     document.querySelector("body").addEventListener("mouseover", function(event){
         event.stopPropagation();
         let target = event.target;
@@ -79,6 +95,8 @@ document.addEventListener("DOMContentLoaded", function(){
 
     })
 
+    
+    
     
 
 });
