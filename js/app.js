@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function(){
         let tasks = document.querySelectorAll("li");
         boucleTask(tasks, target);
 
-        let save1 = document.querySelector(".cookies");
+        /* let save1 = document.querySelector(".cookies");
         if(target == save1){
             let currentliste = document.querySelectorAll("li");
             for (let index = 0; index < currentliste.length; index++) {
@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function(){
                 let cooks = creationCookies("liste", item);
                 alert(cooks);
             }
-        }
+        } */
 
         let save2 = document.querySelector(".storage");
         let items = document.querySelectorAll("span");
@@ -54,6 +54,7 @@ document.addEventListener("DOMContentLoaded", function(){
                 todoItems.push(getItem(index));
                 
             }
+            
             if(todoItems.length != 0){
                alert("Liste enregistrée avec succès") 
                console.log(todoItems)
