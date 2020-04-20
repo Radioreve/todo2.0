@@ -16,7 +16,7 @@ main{
     background: white;
     width: 20%;
     min-height: 35vh;
-    padding: 3% 3% 10% 3%;
+    padding: 3% 5% 10% 5%;
     box-shadow: 1px 1px 5px lightgray;
     z-index: 0;
 }
@@ -33,7 +33,7 @@ main{
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #7adfa9;
+    background: #7ad0df;
     color: white;
     width: 100px;
     height: 100px;
@@ -71,16 +71,15 @@ li{
     color: white;
 }
 
-.cookies, .storage{
-    padding: 3%;
-    background-color: lightcoral;
-    text-align: center;
-}
 
 /****** EVENEMENTS ********/
 .done{
     text-decoration: line-through;
     color: rgba(199, 196, 196, 0.932);
+}
+
+.creaItem{
+    background-color: #7adfa9;
 }
 
 .validated{
@@ -89,6 +88,12 @@ li{
 
 .delete{
     color: rgba(95, 158, 160, 0.74);
+    position: absolute;
+}
+
+.update{
+    color: rgba(160, 95, 95, 0.808);
+    position: absolute;
 }
 
 .hide{

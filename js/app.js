@@ -16,10 +16,11 @@ document.addEventListener("DOMContentLoaded", function(){
     document.querySelector("body").addEventListener("click", function(event){
         event.stopPropagation();
         let target = event.target;
-        
+
         if(target == iPlus){
             toggleClass(iPlus, "fa-plus");
             toggleClass(iPlus, "fa-check");
+            toggleClass(iPlus, "creaItem");
             toggleItem(input);
             ajouterDOM(liste, input);
             
@@ -28,7 +29,29 @@ document.addEventListener("DOMContentLoaded", function(){
               input.value = '';
             }
 
+            let items = document.querySelectorAll("span");
+            for (let index = 0; index < items.length; index++) {
+                const element = items[index];
+                localStorage.setItem("tache" + index, element.innerHTML);
+            }
+
             return;
+        }
+        
+        let tasks = document.querySelectorAll("span");
+        for (let index = 0; index < tasks.length; index++) {
+            const element = tasks[index];
+    
+            if(target == element){
+                toggleClass(iPlus, "fa-plus");
+                toggleClass(iPlus, "fa-pen");
+                toggleClass(input, "hide");
+                toggleClass(iPlus, "creaItem");
+                
+                element.replaceWith(input);
+                input.value = element.innerText;
+                
+            }
         }
 
         let cercle = document.querySelectorAll(".far");
@@ -37,65 +60,15 @@ document.addEventListener("DOMContentLoaded", function(){
         let poubelle = document.querySelectorAll(".fa-trash");
         boucleTrash(poubelle, target)
 
-        let tasks = document.querySelectorAll("li");
-        boucleTask(tasks, target);
-
-        /* let save1 = document.querySelector(".cookies");
-        if(target == save1){
-            let currentliste = document.querySelectorAll("li");
-            for (let index = 0; index < currentliste.length; index++) {
-                const element = currentliste[index];
-                let item = element.firstChild.innerText;
-                let cooks = creationCookies("liste", item);
-                alert(cooks);
-            }
-        } */
-
-        let save2 = document.querySelector(".storage");
-        let items = document.querySelectorAll("span");
-        if(target == save2){
-            for (let index = 0; index < items.length; index++) {
-                const element = items[index];
-                localStorage.setItem("tache" + index, element.innerHTML);
-
-                /* todoItems.push(getItem(index));
-                console.log(todoItems[0].tache); */
-                
-            }
-            if(localStorage.length != 0){
-                alert("La liste a bien été enregistrée.")  
-            }
-            
-            
-            /* if(todoItems.length != 0){
-                alert("Liste enregistrée avec succès") 
-                console.log(todoItems)
-
-                todoItems.forEach(element => {
-                    let obj = creationListeItem(element.tache);
-                    ajouterDOM(liste, obj);
-                }); 
-            }*/
-
-        }
-
-        
     })
 
-    
 
     document.querySelector("body").addEventListener("mouseover", function(event){
         event.stopPropagation();
         let target = event.target;
 
-        let iPlus = document.querySelector(".plus");
-        let save1 = document.querySelector(".cookies");
-        let save2 = document.querySelector(".storage");
-
-        if(target == iPlus || target == save1 || target == save2){
+        if(target == iPlus){
             curseur(iPlus, "pointer");
-            curseur(save1, "pointer");
-            curseur(save2, "pointer");
         }
 
         let cercle = document.querySelectorAll(".far");
@@ -116,6 +89,27 @@ document.addEventListener("DOMContentLoaded", function(){
 
     })
 
+
+    let tasks = document.querySelectorAll("li > span");
+    let pencil = document.querySelectorAll(".fa-pencil-alt");
+    for (let index = 0; index < tasks.length; index++) { 
+        for (let index = 0; index < pencil.length; index++) {
+            const element = tasks[index];
+            const elm = pencil[index];
+
+            element.addEventListener("mouseenter", function(){
+                curseur(element, "pointer");
+                elm.classList.remove("hide")
+            })
+
+            element.addEventListener("mouseleave", function(){
+                curseur(element, "auto");
+                elm.classList.add("hide") 
+            })
+        }    
+    }
+
     
 
 });
+
