@@ -20,23 +20,6 @@ document.addEventListener("DOMContentLoaded", function(){
         event.stopPropagation();
         let target = event.target;
 
-        let tasks = document.querySelectorAll("span");
-        for (let index = 0; index < tasks.length; index++) {
-            const element = tasks[index];
-    
-            if(target == element){
-                toggleClass(iPlus, "fa-plus");
-                toggleClass(iPlus, "fa-pen");
-                toggleClass(input, "hide");
-                toggleClass(iPlus, "creaItem");
-                
-                let li = element.parentNode;
-                li.replaceWith(input);
-                input.value = element.innerText;
-                
-            }
-        }
-
         if(target == iPlus){
             toggleClass(iPlus, "fa-plus");
             toggleClass(iPlus, "fa-check");
@@ -58,6 +41,23 @@ document.addEventListener("DOMContentLoaded", function(){
             return;
         }
 
+        let tasks = document.querySelectorAll("span");
+        for (let index = 0; index < tasks.length; index++) {
+            const element = tasks[index];
+    
+            if(target == element){
+                toggleClass(iPlus, "fa-plus");
+                toggleClass(iPlus, "fa-pen");
+                toggleClass(input, "hide");
+                toggleClass(iPlus, "creaItem");
+                
+                let li = element.parentNode;
+                li.replaceWith(input);
+                input.value = element.innerText;
+                
+            }
+        }
+
         let cercle = document.querySelectorAll(".far");
         boucleCercle(cercle, target);
 
@@ -65,25 +65,6 @@ document.addEventListener("DOMContentLoaded", function(){
         boucleTrash(poubelle, target)
 
     })
-
-    let tasks = document.querySelectorAll("li > span");
-    let pencil = document.querySelectorAll(".fa-pencil-alt");
-    for (let index = 0; index < tasks.length; index++) { 
-        for (let index = 0; index < pencil.length; index++) {
-            const element = tasks[index];
-            const elm = pencil[index];
-
-            element.addEventListener("mouseenter", function(){
-                curseur(element, "pointer");
-                elm.classList.remove("hide")
-            })
-
-            element.addEventListener("mouseleave", function(){
-                curseur(element, "auto");
-                elm.classList.add("hide") 
-            })
-        }    
-    }
 
 
     document.querySelector("body").addEventListener("mouseover", function(event){
@@ -108,6 +89,25 @@ document.addEventListener("DOMContentLoaded", function(){
             if(target == element){
                 curseur(element, "pointer");
             } 
+        }
+
+        let tasks = document.querySelectorAll("li > span");
+        let pencil = document.querySelectorAll(".fa-pencil-alt");
+        for (let index = 0; index < tasks.length; index++) { 
+            for (let index = 0; index < pencil.length; index++) {
+                const element = tasks[index];
+                const elm = pencil[index];
+
+                element.addEventListener("mouseenter", function(){
+                    curseur(element, "pointer");
+                    elm.classList.remove("hide")
+                })
+
+                element.addEventListener("mouseleave", function(){
+                    curseur(element, "auto");
+                    elm.classList.add("hide") 
+                })
+            }    
         }
 
     })
