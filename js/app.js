@@ -8,8 +8,11 @@ document.addEventListener("DOMContentLoaded", function(){
 
     if(localStorage.length != 0){
         for (let index = 0; index < localStorage.length; index++) {    
-            let newItem = creationListeItem(localStorage.getItem("tache"+index));
-            ajouterDOM(liste, newItem);
+            if(localStorage.getItem("tache"+index) != null){
+                let newItem = creationListeItem(localStorage.getItem("tache"+index));
+                ajouterDOM(liste, newItem);   
+            }
+            
         }
     }
 
