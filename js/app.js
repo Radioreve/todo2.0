@@ -56,9 +56,14 @@ document.addEventListener("DOMContentLoaded", function(){
             }
             
             if(todoItems.length != 0){
-               alert("Liste enregistrée avec succès") 
-               console.log(todoItems)
-            }            
+                alert("Liste enregistrée avec succès") 
+                console.log(todoItems)
+
+                todoItems.forEach(element => {
+                    let obj = creationListeItem(element.tache);
+                    ajouterDOM(liste, obj);
+                });
+            } 
 
         }
 
@@ -66,8 +71,6 @@ document.addEventListener("DOMContentLoaded", function(){
     })
 
     
-    
-
 
     document.querySelector("body").addEventListener("mouseover", function(event){
         event.stopPropagation();
@@ -100,5 +103,7 @@ document.addEventListener("DOMContentLoaded", function(){
         }
 
     })
+
+    
 
 });
