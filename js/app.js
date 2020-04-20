@@ -6,6 +6,13 @@ document.addEventListener("DOMContentLoaded", function(){
     let iPlus = document.querySelector('.plus');
     let input = creationInput();
 
+    if(localStorage.length != 0){
+        for (let index = 0; index < localStorage.length; index++) {    
+            let newItem = creationListeItem(localStorage.getItem("tache"+index));
+            ajouterDOM(liste, newItem);
+        }
+    }
+
     document.querySelector("body").addEventListener("click", function(event){
         event.stopPropagation();
         let target = event.target;
@@ -49,21 +56,26 @@ document.addEventListener("DOMContentLoaded", function(){
         if(target == save2){
             for (let index = 0; index < items.length; index++) {
                 const element = items[index];
-                let task = { id: + index, tache: + "" + element.innerHTML + "" };
-                setItem(index, task);
-                todoItems.push(getItem(index));
+                localStorage.setItem("tache" + index, element.innerHTML);
+
+                /* todoItems.push(getItem(index));
+                console.log(todoItems[0].tache); */
                 
             }
+            if(localStorage.length != 0){
+                alert("La liste a bien été enregistrée.")  
+            }
             
-            if(todoItems.length != 0){
+            
+            /* if(todoItems.length != 0){
                 alert("Liste enregistrée avec succès") 
                 console.log(todoItems)
 
                 todoItems.forEach(element => {
                     let obj = creationListeItem(element.tache);
                     ajouterDOM(liste, obj);
-                });
-            } 
+                }); 
+            }*/
 
         }
 

@@ -75,6 +75,7 @@ function boucleTrash(tableau, cible){
                 let item = element.parentNode;
                 let listeItem = item.parentNode;
                 listeItem.remove();
+                //localStorage.removeItem("tache"+index);
             }
         }
         
