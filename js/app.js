@@ -5,14 +5,18 @@ document.addEventListener("DOMContentLoaded", function(){
     let liste = document.querySelector("ul");
     let iPlus = document.querySelector('.plus');
     let input = creationInput();
+    let circleList = []
+    let textList = []
+    let trashList = []
+    let itemsList = []
+    let penList = []
 
     if(localStorage.length != 0){
         for (let index = 0; index < localStorage.length; index++) {    
             if(localStorage.getItem("tache"+index) != null){
                 let newItem = creationListeItem(localStorage.getItem("tache"+index));
-                ajouterDOM(liste, newItem);   
-            }
-            
+                liste.append(newItem);
+            }  
         }
     }
 
@@ -20,95 +24,141 @@ document.addEventListener("DOMContentLoaded", function(){
         event.stopPropagation();
         let target = event.target;
 
+        //Ajouter un item à la liste
         if(target == iPlus){
-            toggleClass(iPlus, "fa-plus");
-            toggleClass(iPlus, "fa-check");
-            toggleClass(iPlus, "creaItem");
-            toggleItem(input);
-            ajouterDOM(liste, input);
+            iPlus.classList.toggle("fa-plus");
+            iPlus.classList.toggle("fa-check");
+            iPlus.classList.toggle("creaItem");
+            input.classList.toggle("hide");
+            liste.append(input);
             
             if(input.value != ""){
-              ajouterDOM(liste, creationListeItem(input.value))
+              liste.append(creationListeItem(input.value))
               input.value = '';
             }
-
+            
+            //Stocker l'item dans le localStorage
             let items = document.querySelectorAll("span");
-            for (let index = 0; index < items.length; index++) {
-                const element = items[index];
-                localStorage.setItem("tache" + index, element.innerHTML);
-            }
+            items.forEach((singleItem, index) => {
+                localStorage.setItem("tache" + index, singleItem.innerHTML)
+            })
 
             return;
         }
-
+        
+        //Modification d'un item
         let tasks = document.querySelectorAll("span");
-        for (let index = 0; index < tasks.length; index++) {
-            const element = tasks[index];
-    
+        tasks.forEach(element =>{
             if(target == element){
-                toggleClass(iPlus, "fa-plus");
-                toggleClass(iPlus, "fa-pen");
-                toggleClass(input, "hide");
-                toggleClass(iPlus, "creaItem");
+                iPlus.classList.toggle("fa-plus");
+                iPlus.classList.toggle("fa-pen");
+                input.classList.toggle("hide");
+                iPlus.classList.toggle("creaItem");
                 
                 let li = element.parentNode;
                 li.replaceWith(input);
                 input.value = element.innerText;
                 
             }
+        }) 
+
+        var itemsValidation = document.querySelectorAll(".far");
+        var trash = document.querySelectorAll(".fa-trash");
+        var listeItems = document.querySelectorAll("li");
+        var itemsSpan = document.querySelectorAll("li > span")
+        var pencil = document.querySelectorAll(".fa-pencil-alt");
+
+        //Ajout d'un id aux poubelles, aux cercles, aux spans, aux stylos et aux items
+        addId(itemsValidation, circleList, "check")
+        addId(itemsSpan, textList, "text")
+        addId(trash, trashList, "trash")
+        addId(listeItems, itemsList, "item")
+        addId(pencil, penList, "pen")
+
+        //Valider un cercle
+        circleList.forEach((singleCircle, index) =>{
+            if(target == document.querySelector("#check"+index)){
+                validatedCircle(singleCircle)
+            }
+        })
+
+        //Rayer l'item
+        textList.forEach((singleTask, index) => {
+            if(target == document.querySelector("#check"+index)){
+                checkItem(singleTask)
+            }
+        })
+
+        //Afficher la poubelle
+        trashList.forEach((singleTrash, index) =>{
+            if(target == document.querySelector("#check"+index)){
+                showTrash(singleTrash)
+            }
+        })
+        
+        //Supprimer un item
+        itemsList.forEach((singleItem, index) => {
+            if(target == document.querySelector("#trash"+index)){
+                singleItem.remove()
+            }
+        })
+
+        //Clearer la liste + localStorage
+        if(target == document.querySelector("button")){
+            document.querySelectorAll("li").forEach(singleElement => {
+                singleElement.remove()
+            })
+            localStorage.clear();
         }
-
-        let cercle = document.querySelectorAll(".far");
-        boucleCercle(cercle, target);
-
-        let poubelle = document.querySelectorAll(".fa-trash");
-        boucleTrash(poubelle, target)
 
     })
 
+    var itemsValidation = document.querySelectorAll(".far");
+    var trash = document.querySelectorAll(".fa-trash");
+    var listeItems = document.querySelectorAll("li");
+    var itemsSpan = document.querySelectorAll("li > span")
+    var pencil = document.querySelectorAll(".fa-pencil-alt");
+
+    //Ajout d'un id aux poubelles, aux cercles, aux spans, aux stylos et aux items
+    addId(itemsValidation, circleList, "check")
+    addId(itemsSpan, textList, "text")
+    addId(trash, trashList, "trash")
+    addId(listeItems, itemsList, "item")
+    addId(pencil, penList, "pen")
+    
 
     document.querySelector("body").addEventListener("mouseover", function(event){
         event.stopPropagation();
         let target = event.target;
-
+        
+        //Changer le curseur
         if(target == iPlus){
-            curseur(iPlus, "pointer");
+            iPlus.style.cursor = "pointer";
         }
 
-        let cercle = document.querySelectorAll(".far");
-        for (let index = 0; index < cercle.length; index++) {
-            const element = cercle[index];
-            if(target == element){
-                curseur(element, "pointer");
+        circleList.forEach((singleCircle, index) =>{
+            if(target == document.querySelector("#check"+index)){
+                singleCircle.style.cursor = "pointer"
             }
-        }
+        })
 
-        let poubelle = document.querySelectorAll(".fa-trash");
-        for (let index = 0; index < poubelle.length; index++) {
-            const element = poubelle[index];
-            if(target == element){
-                curseur(element, "pointer");
-            } 
-        }
+        textList.forEach((singleTask, index) => {
+            if(target == document.querySelector("#text"+index)){
+                singleTask.style.cursor = "pointer"
+            }
+        })
 
-        let tasks = document.querySelectorAll("li > span");
-        let pencil = document.querySelectorAll(".fa-pencil-alt");
-        for (let index = 0; index < tasks.length; index++) { 
-            for (let index = 0; index < pencil.length; index++) {
-                const element = tasks[index];
-                const elm = pencil[index];
+        trashList.forEach((singleTrash, index) =>{
+            if(target == document.querySelector("#trash"+index)){
+                singleTrash.style.cursor = "pointer"
+            }
+        })
 
-                element.addEventListener("mouseenter", function(){
-                    curseur(element, "pointer");
-                    elm.classList.remove("hide")
-                })
-
-                element.addEventListener("mouseleave", function(){
-                    curseur(element, "auto");
-                    elm.classList.add("hide") 
-                })
-            }    
-        }
+        penList.forEach((singlePen, index) => {
+            if(target == document.querySelector("#text"+index)){
+                singlePen.classList.toggle("hide")
+            }
+        });
 
     })
 

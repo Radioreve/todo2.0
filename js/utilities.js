@@ -19,71 +19,32 @@ function creationListeItem(valeurInput){
     trash.classList.add("fas", "fa-trash", "delete", "hide");
     pen.classList.add("fas", "fa-pencil-alt", "update", "hide");
 
-    ajouterDOM(span, valeurInput);
-    ajouterDOM(li, span);
-    ajouterDOM(li, icone);
-    ajouterDOM(icone, trash);
-    ajouterDOM(icone, pen);
+    span.append(valeurInput);
+    li.append(span);
+    li.append(icone);
+    icone.append(trash);
+    icone.append(pen);
     return li;
 }
 
-function togglePlus(){
-    let iPlus = document.querySelector('.plus');
-    return iPlus.classList.toggle("fa-plus");
+function addId(startArray, endArray, idName){
+    startArray.forEach((newItem, index) => {
+        newItem.id = idName+index
+        endArray.push(document.querySelector("#"+newItem.id))
+    })
 }
 
-function toggleCheck(){
-    let iPlus = document.querySelector('.plus');
-    return iPlus.classList.toggle("fa-check");
+function checkItem(item){
+    item.classList.toggle("done");
 }
 
-function toggleItem(quoi){
-    return quoi.classList.toggle("hide");
+function validatedCircle(iconeCircle){
+    iconeCircle.classList.toggle("fa-circle");
+    iconeCircle.classList.toggle("fa-check-circle");
+    iconeCircle.classList.toggle("validated")
 }
 
-function toggleClass(qui, quoi){
-    return qui.classList.toggle(quoi);
+function showTrash(iconeTrash){
+    iconeTrash.classList.toggle("hide");
 }
 
-function ajouterDOM(ou, quoi){
-    return ou.append(quoi);
-}
-
-function boucleCercle(tableau, cible){
-    for (let index = 0; index < tableau.length; index++) {
-        const element = tableau[index];
-        
-        if(cible == element){
-            let span = element.previousSibling;
-            let trash = element.firstChild;
-            toggleClass(span, "done");
-            toggleClass(element, "fa-circle");
-            toggleClass(element, "fa-check-circle");
-            toggleClass(element, "validated")
-            toggleClass(trash, "hide");
-        }
-
-    }
-    
-}
-
-function boucleTrash(tableau, cible){
-    for (let index = 0; index < tableau.length; index++) {
-        const element = tableau[index];
-        
-        if(cible == element){
-            
-            let item = element.parentNode;
-            let listeItem = item.parentNode;
-            listeItem.remove();
-            localStorage.removeItem("tache"+index);
-            
-        }
-        
-        
-    }
-}
-
-function curseur(qui, quoi){
-    return qui.style.cursor = quoi;
-}
