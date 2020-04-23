@@ -10,12 +10,29 @@ document.addEventListener("DOMContentLoaded", function(){
     let trashList = []
     let itemsList = []
     let penList = []
+    let num = 0
+    
 
     if(localStorage.length != 0){
         for (let index = 0; index < localStorage.length; index++) {    
             if(localStorage.getItem("tache"+index) != null){
                 let newItem = creationListeItem(localStorage.getItem("tache"+index));
                 liste.append(newItem);
+                //Sélection des éléments
+                let check = document.querySelector("#check"+num)
+                let text = document.querySelector("#text"+num)
+                let trash = document.querySelector("#trash"+num)
+                let item = document.querySelector("#item"+num)
+                let pen = document.querySelector("#pen"+num)
+
+                //Placement des élément dans un tableau
+                circleList.push(check)
+                textList.push(text)
+                trashList.push(trash)
+                itemsList.push(item)
+                penList.push(pen)
+
+                num++
             }  
         }
     }
@@ -33,8 +50,28 @@ document.addEventListener("DOMContentLoaded", function(){
             liste.append(input);
             
             if(input.value != ""){
-              liste.append(creationListeItem(input.value))
-              input.value = '';
+                let newLi = creationListeItem(input.value)
+                liste.append(newLi)
+
+                //Sélection des éléments
+                let check = document.querySelector("#check"+num)
+                let text = document.querySelector("#text"+num)
+                let trash = document.querySelector("#trash"+num)
+                let item = document.querySelector("#item"+num)
+                let pen = document.querySelector("#pen"+num)
+
+                //Placement des élément dans un tableau
+                circleList.push(check)
+                textList.push(text)
+                trashList.push(trash)
+                itemsList.push(item)
+                penList.push(pen)
+
+                //Remise à zéro de la valeur d'input
+                input.value = ''
+
+                //incrémentation de num
+                num++
             }
             
             //Stocker l'item dans le localStorage
@@ -61,19 +98,6 @@ document.addEventListener("DOMContentLoaded", function(){
                 
             }
         }) 
-
-        var itemsValidation = document.querySelectorAll(".far");
-        var trash = document.querySelectorAll(".fa-trash");
-        var listeItems = document.querySelectorAll("li");
-        var itemsSpan = document.querySelectorAll("li > span")
-        var pencil = document.querySelectorAll(".fa-pencil-alt");
-
-        //Ajout d'un id aux poubelles, aux cercles, aux spans, aux stylos et aux items
-        addId(itemsValidation, circleList, "check")
-        addId(itemsSpan, textList, "text")
-        addId(trash, trashList, "trash")
-        addId(listeItems, itemsList, "item")
-        addId(pencil, penList, "pen")
 
         //Valider un cercle
         circleList.forEach((singleCircle, index) =>{
@@ -109,23 +133,11 @@ document.addEventListener("DOMContentLoaded", function(){
                 singleElement.remove()
             })
             localStorage.clear();
+            index = 0
         }
 
     })
 
-    var itemsValidation = document.querySelectorAll(".far");
-    var trash = document.querySelectorAll(".fa-trash");
-    var listeItems = document.querySelectorAll("li");
-    var itemsSpan = document.querySelectorAll("li > span")
-    var pencil = document.querySelectorAll(".fa-pencil-alt");
-
-    //Ajout d'un id aux poubelles, aux cercles, aux spans, aux stylos et aux items
-    addId(itemsValidation, circleList, "check")
-    addId(itemsSpan, textList, "text")
-    addId(trash, trashList, "trash")
-    addId(listeItems, itemsList, "item")
-    addId(pencil, penList, "pen")
-    
 
     document.querySelector("body").addEventListener("mouseover", function(event){
         event.stopPropagation();
@@ -153,15 +165,16 @@ document.addEventListener("DOMContentLoaded", function(){
                 singleTrash.style.cursor = "pointer"
             }
         })
-
+        
         //Affichage du stylo
-        penList.forEach((singlePen, index) => {
+       penList.forEach((singlePen, index) => {
             if(target == document.querySelector("#text"+index)){
-                singlePen.classList.toggle("hide")
+                singlePen.classList.remove("hide") 
+            }else if (target != document.querySelector("#text"+index)){
+                singlePen.classList.add("hide")
             }
-        });
+        })
 
     })
 
 });
-

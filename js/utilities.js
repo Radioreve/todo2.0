@@ -1,5 +1,7 @@
 "use strict"
 
+let index = 0
+
 /******* FUNCTIONS ********/
 
 function creationInput(){
@@ -12,26 +14,29 @@ function creationInput(){
 function creationListeItem(valeurInput){
     let li = document.createElement('li'); 
     let span = document.createElement('span');
-    let icone = document.createElement('i');
+    let check = document.createElement('i');
     let trash = document.createElement('i');
     let pen = document.createElement('i');
-    icone.classList.add("far", "fa-circle");
+    check.classList.add("far", "fa-circle");
     trash.classList.add("fas", "fa-trash", "delete", "hide");
     pen.classList.add("fas", "fa-pencil-alt", "update", "hide");
 
+    //Ajout ids
+    li.id = "item"+index
+    span.id = "text"+index
+    check.id = "check"+index
+    trash.id = "trash"+index
+    pen.id = "pen"+index
+
     span.append(valeurInput);
     li.append(span);
-    li.append(icone);
-    icone.append(trash);
-    icone.append(pen);
-    return li;
-}
+    li.append(check);
+    check.append(trash);
+    check.append(pen);
+    
+    index++
 
-function addId(startArray, endArray, idName){
-    startArray.forEach((newItem, index) => {
-        newItem.id = idName+index
-        endArray.push(document.querySelector("#"+newItem.id))
-    })
+    return li;
 }
 
 function checkItem(item){
@@ -47,4 +52,3 @@ function validatedCircle(iconeCircle){
 function showTrash(iconeTrash){
     iconeTrash.classList.toggle("hide");
 }
-
