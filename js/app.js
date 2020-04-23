@@ -154,6 +154,7 @@ document.addEventListener("DOMContentLoaded", function(){
             }
         })
 
+        //Affichage du stylo
         penList.forEach((singlePen, index) => {
             if(target == document.querySelector("#text"+index)){
                 singlePen.classList.toggle("hide")
