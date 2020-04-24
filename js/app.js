@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function(){
         let target = event.target;
 
         //Ajouter un item à la liste
-        if(target == iPlus){
+        if(target === iPlus){
             iPlus.classList.toggle("fa-plus");
             iPlus.classList.toggle("fa-check");
             iPlus.classList.toggle("creaItem");
@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function(){
         //Modification d'un item
         let tasks = document.querySelectorAll("span");
         tasks.forEach(element =>{
-            if(target == element){
+            if(target === element){
                 iPlus.classList.toggle("fa-plus");
                 iPlus.classList.toggle("fa-pen");
                 input.classList.toggle("hide");
@@ -101,28 +101,28 @@ document.addEventListener("DOMContentLoaded", function(){
 
         //Valider un cercle
         circleList.forEach((singleCircle, index) =>{
-            if(target == document.querySelector("#check"+index)){
+            if(target === document.querySelector("#check"+index)){
                 validatedCircle(singleCircle)
             }
         })
 
         //Rayer l'item
         textList.forEach((singleTask, index) => {
-            if(target == document.querySelector("#check"+index)){
+            if(target === document.querySelector("#check"+index)){
                 checkItem(singleTask)
             }
         })
 
         //Afficher la poubelle
         trashList.forEach((singleTrash, index) =>{
-            if(target == document.querySelector("#check"+index)){
+            if(target === document.querySelector("#check"+index)){
                 showTrash(singleTrash)
             }
         })
         
         //Supprimer un item
         itemsList.forEach((singleItem, index) => {
-            if(target == document.querySelector("#trash"+index)){
+            if(target === document.querySelector("#trash"+index)){
                 singleItem.remove()
             }
         })
@@ -135,31 +135,31 @@ document.addEventListener("DOMContentLoaded", function(){
         let target = event.target;
         
         //Changer le curseur
-        if(target == iPlus){
+        if(target === iPlus){
             iPlus.style.cursor = "pointer";
         }
 
         circleList.forEach((singleCircle, index) =>{
-            if(target == document.querySelector("#check"+index)){
+            if(target === document.querySelector("#check"+index)){
                 singleCircle.style.cursor = "pointer"
             }
         })
 
         textList.forEach((singleTask, index) => {
-            if(target == document.querySelector("#text"+index)){
+            if(target === document.querySelector("#text"+index)){
                 singleTask.style.cursor = "pointer"
             }
         })
 
         trashList.forEach((singleTrash, index) =>{
-            if(target == document.querySelector("#trash"+index)){
+            if(target === document.querySelector("#trash"+index)){
                 singleTrash.style.cursor = "pointer"
             }
         })
         
         //Affichage du stylo
        penList.forEach((singlePen, index) => {
-            if(target == document.querySelector("#text"+index)){
+            if(target === document.querySelector("#text"+index)){
                 singlePen.classList.remove("hide") 
             }else if (target != document.querySelector("#text"+index)){
                 singlePen.classList.add("hide")
