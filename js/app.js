@@ -127,15 +127,6 @@ document.addEventListener("DOMContentLoaded", function(){
             }
         })
 
-        //Clearer la liste + localStorage
-        if(target == document.querySelector("button")){
-            document.querySelectorAll("li").forEach(singleElement => {
-                singleElement.remove()
-            })
-            localStorage.clear();
-            index = 0
-        }
-
     })
 
 
